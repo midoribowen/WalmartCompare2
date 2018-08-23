@@ -24,9 +24,9 @@ class SearchResponseBoundaryCallback(
         private const val NETWORK_PAGE_SIZE = 25
     }
 
-    // keep the last requested page. When the request is successful, increment the page number.
-    // TODO: Fix this to use item to start and increment up by page size
-    private var lastRequestedPageStart = 1
+    // keep the last requested item start. When the request is successful,
+        // increment the item to start at.
+    private var lastRequestedItemStart = 1
 
     private val _networkErrors = MutableLiveData<String>()
     // LiveData of network errors.
@@ -49,10 +49,10 @@ class SearchResponseBoundaryCallback(
     private fun requestAndSaveData(query: String) {
         if (isRequestInProgress) return
         isRequestInProgress = true
-        Log.d(TAG, "lastRequestedPage=" + lastRequestedPageStart)
-        searchItems(service, query, lastRequestedPageStart, NETWORK_PAGE_SIZE, { items ->
+        Log.d(TAG, "lastRequestedPage=" + lastRequestedItemStart)
+        searchItems(service, query, lastRequestedItemStart, NETWORK_PAGE_SIZE, { items ->
                     cache.insert(items, {
-                        lastRequestedPageStart += NETWORK_PAGE_SIZE
+                        lastRequestedItemStart += NETWORK_PAGE_SIZE
                         isRequestInProgress = false
                     })
                 }, { error ->

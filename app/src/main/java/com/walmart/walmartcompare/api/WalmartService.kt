@@ -19,13 +19,13 @@ private val TAG = WalmartService::class.java.simpleName
 fun searchItems(
         service: WalmartService,
         query: String,
-        pageStart: Int,
+        itemStart: Int,
         itemsPerPage: Int,
         onSuccess: (items: List<SearchItem>) -> Unit,
         onError: (error: String) -> Unit) {
-    Log.d(TAG, "query: $query, pageStart: $pageStart, itemsPerPage: $itemsPerPage")
+    Log.d(TAG, "query: $query, itemStart: $itemStart, itemsPerPage: $itemsPerPage")
 
-    service.search(query, pageStart, itemsPerPage, BuildConfig.WALMART_API_KEY).enqueue(
+    service.search(query, itemStart, itemsPerPage, BuildConfig.WALMART_API_KEY).enqueue(
             object : Callback<WalmartSearchResponse> {
                 override fun onFailure(call: Call<WalmartSearchResponse>?, t: Throwable) {
                     Log.e(TAG, "fail to get data", t)
