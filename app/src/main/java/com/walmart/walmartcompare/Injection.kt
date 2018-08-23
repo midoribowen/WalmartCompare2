@@ -2,6 +2,11 @@ package com.walmart.walmartcompare
 
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import com.walmart.walmartcompare.api.WalmartService
+import com.walmart.walmartcompare.data.WalmartRepository
+import com.walmart.walmartcompare.db.SearchItemDatabase
+import com.walmart.walmartcompare.db.WalmartLocalCache
+import com.walmart.walmartcompare.ui.ViewModelFactory
 import java.util.concurrent.Executors
 
 /**

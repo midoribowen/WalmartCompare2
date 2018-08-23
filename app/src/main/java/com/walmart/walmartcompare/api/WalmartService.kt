@@ -1,6 +1,8 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.api
 
 import android.util.Log
+import com.walmart.walmartcompare.BuildConfig
+import com.walmart.walmartcompare.model.SearchItem
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
@@ -17,15 +19,16 @@ private val TAG = WalmartService::class.java.simpleName
 fun searchItems(
         service: WalmartService,
         query: String,
-//        page: Int,
+        pageStart: Int,
+        itemsPerPage: Int,
         onSuccess: (items: List<SearchItem>) -> Unit,
         onError: (error: String) -> Unit) {
-    Log.d(TAG, "query: $query")
+    Log.d(TAG, "query: $query, pageStart: $pageStart, itemsPerPage: $itemsPerPage")
 
-    service.search(query, BuildConfig.WALMART_API_KEY).enqueue(
+    service.search(query, pageStart, itemsPerPage, BuildConfig.WALMART_API_KEY).enqueue(
             object : Callback<WalmartSearchResponse> {
                 override fun onFailure(call: Call<WalmartSearchResponse>?, t: Throwable) {
-                    Log.d(TAG, "fail to get data")
+                    Log.e(TAG, "fail to get data", t)
                     onError(t.message ?: "unknown error")
                 }
 
@@ -49,6 +52,8 @@ fun searchItems(
 interface WalmartService {
     @GET("search?format=json")
     fun search(@Query("query") query: String,
+               @Query("start") page: Int,
+               @Query("numItems") per_page: Int,
                @Query("apiKey") apiKey: String): Call<WalmartSearchResponse>
 
     companion object {

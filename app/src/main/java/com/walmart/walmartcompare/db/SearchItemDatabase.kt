@@ -1,9 +1,10 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import com.walmart.walmartcompare.model.SearchItem
 
 /**
  * Database schema that holds the list of items.

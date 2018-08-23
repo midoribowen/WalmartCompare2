@@ -1,9 +1,13 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.data
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PagedList
 import android.util.Log
+import com.walmart.walmartcompare.db.WalmartLocalCache
+import com.walmart.walmartcompare.api.WalmartService
+import com.walmart.walmartcompare.model.SearchItem
+import com.walmart.walmartcompare.api.searchItems
 
 private val TAG = SearchResponseBoundaryCallback::class.java.simpleName
 /**
@@ -17,12 +21,12 @@ class SearchResponseBoundaryCallback(
 ) : PagedList.BoundaryCallback<SearchItem>() {
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 10
+        private const val NETWORK_PAGE_SIZE = 25
     }
 
     // keep the last requested page. When the request is successful, increment the page number.
     // TODO: Fix this to use item to start and increment up by page size
-    private var lastRequestedPage = 1
+    private var lastRequestedPageStart = 1
 
     private val _networkErrors = MutableLiveData<String>()
     // LiveData of network errors.
@@ -45,14 +49,13 @@ class SearchResponseBoundaryCallback(
     private fun requestAndSaveData(query: String) {
         if (isRequestInProgress) return
         isRequestInProgress = true
-        searchItems(service, query,
-//                lastRequestedPage,
-                { items ->
-            cache.insert(items, {
-//                lastRequestedPage++
-                isRequestInProgress = false
-            })
-        }, { error ->
+        Log.d(TAG, "lastRequestedPage=" + lastRequestedPageStart)
+        searchItems(service, query, lastRequestedPageStart, NETWORK_PAGE_SIZE, { items ->
+                    cache.insert(items, {
+                        lastRequestedPageStart += NETWORK_PAGE_SIZE
+                        isRequestInProgress = false
+                    })
+                }, { error ->
             _networkErrors.postValue(error)
             isRequestInProgress = false
         })

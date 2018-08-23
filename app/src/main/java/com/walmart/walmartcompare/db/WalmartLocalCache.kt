@@ -1,7 +1,8 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.db
 
 import android.arch.paging.DataSource
 import android.util.Log
+import com.walmart.walmartcompare.model.SearchItem
 import java.util.concurrent.Executor
 
 private val TAG = WalmartLocalCache::class.java.simpleName

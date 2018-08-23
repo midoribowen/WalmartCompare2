@@ -1,7 +1,10 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.data
 
 import android.arch.paging.LivePagedListBuilder
 import android.util.Log
+import com.walmart.walmartcompare.api.WalmartService
+import com.walmart.walmartcompare.db.WalmartLocalCache
+import com.walmart.walmartcompare.model.WalmartSearchResult
 
 private val TAG = WalmartRepository::class.java.simpleName
 

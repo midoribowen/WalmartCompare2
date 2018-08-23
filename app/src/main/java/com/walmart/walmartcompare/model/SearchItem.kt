@@ -1,4 +1,4 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.model
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
@@ -23,7 +23,7 @@ data class SearchItem(
         @SerializedName("largeImage") val largeImage: String?,
         @SerializedName("productTrackingUrl") val productTrackingUrl: String?,
         @SerializedName("ninetySevenCentShipping") val ninetySevenCentShipping: Boolean,
-        @SerializedName("standardShipRate") val standardShipRate: Int,
+        @SerializedName("standardShipRate") val standardShipRate: Double,
         @SerializedName("twoThreeDayShippingRate") val twoThreeDayShippingRate: Int,
     // size
         @SerializedName("color") val color: String?,

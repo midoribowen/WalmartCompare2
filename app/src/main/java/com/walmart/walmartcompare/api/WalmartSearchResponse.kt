@@ -1,6 +1,7 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.api
 
 import com.google.gson.annotations.SerializedName
+import com.walmart.walmartcompare.model.SearchItem
 
 /**
  * Data class to hold search response from search API calls

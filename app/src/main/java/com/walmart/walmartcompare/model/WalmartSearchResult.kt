@@ -1,7 +1,8 @@
-package com.walmart.walmartcompare
+package com.walmart.walmartcompare.model
 
 import android.arch.lifecycle.LiveData
 import android.arch.paging.PagedList
+import com.walmart.walmartcompare.model.SearchItem
 
 /**
  * WalmartSearchResult from a search, which contains LiveData<List<SearchItem>> holding query data,
