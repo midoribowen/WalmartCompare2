@@ -14,7 +14,7 @@ import android.widget.Toast
 import com.walmart.walmartcompare.Injection
 import com.walmart.walmartcompare.R
 import com.walmart.walmartcompare.model.SearchItem
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_product_list.*
 
 private val TAG = ProductListActivity::class.java.simpleName
 
@@ -24,7 +24,7 @@ class ProductListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_product_list)
         // get the view model
         viewModel = ViewModelProviders.of(this, Injection.provideViewModelFactory(this))
                 .get(SearchItemsViewModel::class.java)

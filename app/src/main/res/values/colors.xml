@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="titleColor">#1F75FE</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="colorText">#000000</color>
+    <color name="sparkYellow">#FFC220</color>
+    <color name="rollbackRed">#DE1C24</color>
+    <color name="marketGreen">#5FB446</color>
 </resources>

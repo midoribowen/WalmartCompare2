@@ -2,4 +2,9 @@
     <string name="app_name">Walmart Compare</string>
     <string name="search_hint">Search term</string>
     <string name="no_results">No results 😓</string>
+    <string name="product_price">$%.2f</string>
+    <string name="loading_text">Loading</string>
+    <string name="rating_bar_content_description">Rating %1$.0f out of 5 stars</string>
+    <string name="review_count_text">(%1$d)</string>
+    <string name="review_count_content_description">%1$d reviews total</string>
 </resources>

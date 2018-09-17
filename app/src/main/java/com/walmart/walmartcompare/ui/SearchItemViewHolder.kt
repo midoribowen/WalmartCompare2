@@ -1,19 +1,33 @@
 package com.walmart.walmartcompare.ui
 
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.walmart.walmartcompare.R
 import com.walmart.walmartcompare.model.SearchItem
 
 class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val name: TextView = view.findViewById(R.id.item_name)
+    private val mName: TextView = view.findViewById(R.id.item_name)
+    private val mThumbnailImage: ImageView = view.findViewById(R.id.item_image_view)
+    private val mProductPrice: TextView = view.findViewById(R.id.item_price)
+    private val mRatingBar: RatingBar = view.findViewById(R.id.item_rating_bar)
+    private val mReviewCount: TextView = view.findViewById(R.id.item_review_count)
 
     private var searchItem: SearchItem? = null
+
+    protected var requestManager : RequestManager = Glide.with(itemView.context);
 
     init {
         view.setOnClickListener {
@@ -27,7 +41,7 @@ class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(searchItemRVItem: SearchItem?) {
         if (searchItemRVItem == null) {
             val resources = itemView.resources
-            name.text == "Loading"
+            mName.text == resources.getString(R.string.loading_text)
         } else {
             showSearchItemData(searchItemRVItem)
         }
@@ -35,7 +49,39 @@ class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private fun showSearchItemData(searchItem: SearchItem) {
         this.searchItem = searchItem
-        name.text = searchItem.name
+        val resources = itemView.resources
+
+        val requestOptions : RequestOptions = RequestOptions().centerCrop()
+        if (searchItem.thumbnailImage != null) {
+            val imageUrl = searchItem.thumbnailImage
+            requestOptions
+//                    .override(Constants.MAX_WIDTH, Constants.MAX_HEIGHT)
+                    .placeholder(R.drawable.placeholder)
+                    .fallback(R.drawable.placeholder)
+                    .error(R.drawable.outline_broken_image_24)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+            requestManager
+                    .load(imageUrl)
+                    .apply(requestOptions)
+                    .into(mThumbnailImage)
+        } else {
+            requestManager
+                    .load(R.drawable.outline_photo_24)
+                    .apply(requestOptions)
+                    .into(mThumbnailImage)
+        }
+        mName.text = searchItem.name
+        mProductPrice.text = resources.getString(R.string.product_price, searchItem.salePrice)
+        // Elvis operator: if searchItem.customerRating is null then reviewRating = 0f
+        val reviewRating: Float = searchItem.customerRating?.toFloat() ?: 0f
+        mRatingBar.rating = reviewRating
+        mRatingBar.contentDescription = resources.getString(R.string
+                .rating_bar_content_description, reviewRating)
+        mReviewCount.text = resources.getString(R.string.review_count_text, searchItem.numReviews)
+        mReviewCount.contentDescription = resources.getString(R.string
+                .review_count_content_description, searchItem.numReviews)
+
     }
 
     companion object {

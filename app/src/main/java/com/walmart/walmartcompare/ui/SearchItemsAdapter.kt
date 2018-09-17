@@ -1,15 +1,19 @@
 package com.walmart.walmartcompare.ui
 
 import android.arch.paging.PagedListAdapter
+import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.walmart.walmartcompare.model.SearchItem
+import java.lang.ref.WeakReference
 
 /**
  * Created by Midori on 8/20/18
  */
-class SearchItemsAdapter : PagedListAdapter<SearchItem, RecyclerView.ViewHolder>(SEARCH_ITEM_COMPARATOR) {
+class SearchItemsAdapter : PagedListAdapter<SearchItem, RecyclerView
+.ViewHolder>
+                          (SEARCH_ITEM_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SearchItemViewHolder.create(parent);

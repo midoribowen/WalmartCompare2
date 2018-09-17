@@ -1,17 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <TextView
-        android:id="@+id/item_name"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_white">
+
+    <ImageView
+        android:id="@+id/item_image_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/titleColor"
-        android:textSize="@dimen/item_name_size"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="android-architecture"/>
+        app:layout_constraintEnd_toStartOf="@id/image_guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/placeholder" />
+
+    <TextView
+        android:id="@+id/item_name"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_view_info_margin"
+        android:labelFor="@+id/item_image_view"
+        android:paddingTop="@dimen/view_margin"
+        android:text="Better Homes and Gardens 4-Cube Organizer Bench, Multiple Finishes"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/image_guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <RatingBar
+        android:id="@+id/item_rating_bar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_view_info_margin"
+        android:paddingTop="@dimen/view_margin"
+        app:layout_constraintStart_toEndOf="@id/image_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/item_name"
+        android:progressTint="@color/colorText"
+        android:numStars="5"
+        android:rating="4.5"
+        android:stepSize="0.5"/>
+
+    <TextView
+        android:id="@+id/item_review_count"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_view_info_margin"
+        android:paddingTop="@dimen/view_margin"
+        app:layout_constraintTop_toBottomOf="@+id/item_name"
+        app:layout_constraintStart_toEndOf="@id/item_rating_bar"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/item_price"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_view_info_margin"
+        android:paddingTop="@dimen/view_margin"
+        android:paddingBottom="@dimen/view_margin"
+        app:layout_constraintTop_toBottomOf="@id/item_rating_bar"
+        app:layout_constraintStart_toEndOf="@id/image_guideline"
+        android:text="$0.00" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/image_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.33"
+        android:orientation="vertical"/>
 </android.support.constraint.ConstraintLayout>
