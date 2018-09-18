@@ -27,7 +27,8 @@ class WalmartLocalCache(
     }
 
     /**
-     * Request a LiveData<List<SearchItem>> from the Dao, based on search query
+     * Request a DataSource.Factory from the Dao, based on search query. This gets converted to a
+     * LiveData<PagedList<SearchItem>>
      */
     fun searchResultByQuery(query: String): DataSource.Factory<Int, SearchItem> {
         // appending '%' so we can allow other characters to be before and after the query string
