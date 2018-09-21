@@ -24,7 +24,7 @@ and [Room](https://developer.android.com/topic/libraries/architecture/room). Ano
 |----------------------------------------------|--------|------------------------------------------------------------------------------------------------------------|
 | Set up Walmart API                           | Done   | [x] Retrofit Service<br>[x] Paginated DB                                                                      |
 | Display search results in RecyclerView       | Done   |  [x] Activity<br>[x] ViewModel<rb>[x] Adapter<br>[x] ViewHolder<br>[x] layouts                                         |
-| Show DetailView for clicked item in list     | TODO   | [] pass SearchItem data to DetailViewModel<br>[] display detail view<br>[] add to list button                    |
+| Show DetailView for clicked item in list     | In Progress   | [x] pass SearchItem data to DetailViewModel<br>[x] display detail view<br>[x] add to list button                    |
 | Add item to comparison list        | TODO   | [] comparison list database?<br>                                                                                                          |
 | Show comparison list from options menu click | TODO   | [] collapsible list of feature options<br>[] display features in table view<br>[] items clickable to see details |
 
