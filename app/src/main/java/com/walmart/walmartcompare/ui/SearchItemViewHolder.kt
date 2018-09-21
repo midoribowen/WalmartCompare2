@@ -1,9 +1,6 @@
 package com.walmart.walmartcompare.ui
 
 import android.content.Intent
-import android.content.res.Resources
-import android.net.Uri
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +14,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.walmart.walmartcompare.R
 import com.walmart.walmartcompare.model.SearchItem
+import com.walmart.walmartcompare.Constants.Companion.ITEM_IMAGE_URL
+import com.walmart.walmartcompare.Constants.Companion.ITEM_LONG_DESC
+import com.walmart.walmartcompare.Constants.Companion.ITEM_NAME
+import com.walmart.walmartcompare.Constants.Companion.ITEM_PRICE
+import com.walmart.walmartcompare.Constants.Companion.ITEM_RATING
+import com.walmart.walmartcompare.Constants.Companion.ITEM_REVIEW_COUNT
+import com.walmart.walmartcompare.Constants.Companion.ITEM_SHORT_DESC
 
 class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val mName: TextView = view.findViewById(R.id.item_name)
@@ -31,10 +35,16 @@ class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     init {
         view.setOnClickListener {
-            searchItem?.productUrl?.let { url ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                view.context.startActivity(intent)
+            val productDetailIntent = Intent(it.context, ProductDetailActivity::class.java).apply {
+                putExtra(ITEM_IMAGE_URL, searchItem?.mediumImage)
+                putExtra(ITEM_NAME, searchItem?.name)
+                putExtra(ITEM_PRICE, searchItem?.salePrice)
+                putExtra(ITEM_RATING, searchItem?.customerRating)
+                putExtra(ITEM_REVIEW_COUNT, searchItem?.numReviews)
+                putExtra(ITEM_SHORT_DESC, searchItem?.shortDescription)
+                putExtra(ITEM_LONG_DESC, searchItem?.longDescription)
             }
+            it.context.startActivity(productDetailIntent)
         }
     }
 
@@ -55,7 +65,6 @@ class SearchItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         if (searchItem.thumbnailImage != null) {
             val imageUrl = searchItem.thumbnailImage
             requestOptions
-//                    .override(Constants.MAX_WIDTH, Constants.MAX_HEIGHT)
                     .placeholder(R.drawable.placeholder)
                     .fallback(R.drawable.placeholder)
                     .error(R.drawable.outline_broken_image_24)

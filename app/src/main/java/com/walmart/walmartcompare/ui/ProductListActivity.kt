@@ -47,12 +47,13 @@ class ProductListActivity : AppCompatActivity() {
     private fun initAdapter() {
         list.adapter = adapter
         viewModel.searchItems.observe(this, Observer<PagedList<SearchItem>> {
-            Log.d("Activity", "list: ${it?.size}")
+            Log.d(TAG, "list: ${it?.size}")
             showEmptyList(it?.size == 0)
             adapter.submitList(it)
         })
         viewModel.networkErrors.observe(this, Observer<String> {
-            Toast.makeText(this, "Oops! ${it}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Oops! Out of results!", Toast.LENGTH_LONG).show()
+            Log.e(TAG, it)
         })
     }
 

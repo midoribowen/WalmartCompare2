@@ -10,8 +10,6 @@ import com.walmart.walmartcompare.data.WalmartRepository
 import com.walmart.walmartcompare.model.SearchItem
 import com.walmart.walmartcompare.model.WalmartSearchResult
 
-private val TAG = WalmartRepository::class.java.simpleName
-
 class SearchItemsViewModel(private val repository: WalmartRepository) : ViewModel() {
     private val queryLiveData = MutableLiveData<String>()
     private val searchItemResult: LiveData<WalmartSearchResult> = Transformations.map(queryLiveData, {
